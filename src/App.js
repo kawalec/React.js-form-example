@@ -1,8 +1,28 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.scss";
+import Input from "./components/Input";
 
-function App() {
-  return <div className="App">Test</div>;
+class App extends Component {
+  state = { username: "" };
+
+  handleChange = (e) => {
+    this.setState({
+      username: e.target.value,
+    });
+  };
+
+  render() {
+    return (
+      <form>
+        <Input
+          type={"text"}
+          name={"username"}
+          value={this.state.username}
+          handleChange={this.handleChange}
+        />
+      </form>
+    );
+  }
 }
 
 export default App;
