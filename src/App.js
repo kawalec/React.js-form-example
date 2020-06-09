@@ -15,6 +15,8 @@ class App extends Component {
     return (
       <form>
         <Input
+          id={"user"}
+          label={"Nazwa użytkownika: "}
           type={"text"}
           name={"username"}
           value={this.state.username}
