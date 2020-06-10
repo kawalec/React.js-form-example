@@ -10,10 +10,10 @@ class App extends Component {
     password: "",
     agree: false,
     errors: {
-      username: false,
-      email: false,
-      password: false,
-      agree: false,
+      username: true,
+      email: true,
+      password: true,
+      agree: true,
     },
   };
 
@@ -64,27 +64,26 @@ class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const validation = this.formValidation();
-
-    if (true) {
+    if (validation.formCorrect) {
       this.setState({
         username: "",
         email: "",
         password: "",
         agree: false,
         errors: {
-          username: false,
-          email: false,
-          password: false,
-          agree: false,
+          username: true,
+          email: true,
+          password: true,
+          agree: true,
         },
       });
     } else {
       this.setState({
         errors: {
-          username: false,
-          email: false,
-          password: false,
-          agree: false,
+          username: validation.username,
+          email: validation.email,
+          password: validation.password,
+          agree: validation.agree,
         },
       });
     }
@@ -99,54 +98,56 @@ class App extends Component {
       [name]: type === "checkbox" ? checked : value,
     });
   };
-  data = [
-    {
-      id: "user",
-      label: "Login",
-      type: "text",
-      name: "username",
-      value: this.state.username,
-      error: {
-        status: this.state.errors.username,
-        message: this.errors_message.username,
-      },
-    },
-    {
-      id: "email",
-      label: "E-mail",
-      type: "email",
-      name: "email",
-      value: this.state.email,
-      error: {
-        status: this.state.errors.email,
-        message: this.errors_message.email,
-      },
-    },
-    {
-      id: "pass",
-      label: "Hasło",
-      type: "password",
-      name: "password",
-      value: this.state.password,
-      error: {
-        status: this.state.errors.password,
-        message: this.errors_message.password,
-      },
-    },
-    {
-      id: "agree",
-      label: "Zgody",
-      type: "checkbox",
-      name: "agree",
-      checked: this.state.accept,
-      error: {
-        status: this.state.errors.agree,
-        message: this.errors_message.agree,
-      },
-    },
-  ];
+
   render() {
-    const inputs = this.data.map((inp) => (
+    const data = [
+      {
+        id: "user",
+        label: "Login",
+        type: "text",
+        name: "username",
+        value: this.state.username,
+        error: {
+          status: this.state.errors.username,
+          message: this.errors_message.username,
+        },
+      },
+      {
+        id: "email",
+        label: "E-mail",
+        type: "email",
+        name: "email",
+        value: this.state.email,
+        error: {
+          status: this.state.errors.email,
+          message: this.errors_message.email,
+        },
+      },
+      {
+        id: "pass",
+        label: "Hasło",
+        type: "password",
+        name: "password",
+        value: this.state.password,
+        error: {
+          status: this.state.errors.password,
+          message: this.errors_message.password,
+        },
+      },
+      {
+        id: "agree",
+        label: "Zgody",
+        type: "checkbox",
+        name: "agree",
+        checked: this.state.accept,
+        error: {
+          status: this.state.errors.agree,
+          message: this.errors_message.agree,
+        },
+      },
+    ];
+
+    const inputs = data.map((inp) => (
       <Input
         key={inp.id}
         id={inp.id}
@@ -156,7 +157,6 @@ class App extends Component {
         value={this.state[inp.name]}
         checked={this.state[inp.name]}
         handleChange={this.handleChange}
-        error_status={inp.error.status}
         error={inp.error}
       />
     ));

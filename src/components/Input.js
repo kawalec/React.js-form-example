@@ -16,7 +16,7 @@ const Input = (props) => {
           checked={props.value}
           onChange={props.handleChange}
         ></input>
-        {props.error.status && (
+        {props.error.status ? null : (
           <div className="inputs__errors">{props.error.message}</div>
         )}
       </div>
