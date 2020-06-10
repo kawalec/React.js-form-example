@@ -10,7 +10,7 @@ class App extends Component {
     password: "",
     agree: false,
     errors: {
-      username: true,
+      username: false,
       email: false,
       password: false,
       agree: false,
@@ -25,8 +25,69 @@ class App extends Component {
     agree: "Proszę zaznaczyć zgody!",
   };
 
+  formValidation = () => {
+    let username = true;
+    let email = true;
+    let password = true;
+    let agree = true;
+    let formCorrect = true;
+
+    if (
+      this.state.username.length < 4 ||
+      this.state.username.indexOf(" ") !== -1
+    ) {
+      username = false;
+    }
+    if (this.state.email.indexOf("@") === -1) {
+      email = false;
+    }
+    if (this.state.password.length < 8) {
+      password = false;
+    }
+    if (!this.state.agree) {
+      agree = false;
+    }
+    if (username && email && password && agree) {
+      formCorrect = true;
+    } else {
+      formCorrect = false;
+    }
+    return {
+      formCorrect,
+      username,
+      email,
+      password,
+      agree,
+    };
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
+    const validation = this.formValidation();
+
+    if (true) {
+      this.setState({
+        username: "",
+        email: "",
+        password: "",
+        agree: false,
+        errors: {
+          username: false,
+          email: false,
+          password: false,
+          agree: false,
+        },
+      });
+    } else {
+      this.setState({
+        errors: {
+          username: false,
+          email: false,
+          password: false,
+          agree: false,
+        },
+      });
+    }
   };
 
   handleChange = (e) => {
