@@ -3,7 +3,24 @@ import "./App.scss";
 import Input from "./components/Input";
 
 class App extends Component {
-  state = { username: "", email: "", password: "", agree: false };
+  state = {
+    username: "",
+    email: "",
+    password: "",
+    agree: false,
+    errors: {
+      username: false,
+      email: false,
+      password: false,
+    },
+  };
+
+  errors_message = {
+    username:
+      "Nazwa powinna mieć więcej niż 4 znaki i nie może zawierać spacji!",
+    email: "Brak znaku @ w adresie email!",
+    password: "Hasło musi mieć minimum 8 znaków!",
+  };
 
   handleChange = (e) => {
     const name = e.target.name;
@@ -14,7 +31,6 @@ class App extends Component {
       [name]: type === "checkbox" ? checked : value,
     });
   };
-
   data = [
     {
       id: "user",
@@ -39,7 +55,7 @@ class App extends Component {
     },
     {
       id: "agree",
-      label: "Zgody marketingowe",
+      label: "Zgody",
       type: "checkbox",
       name: "agree",
       checked: this.state.accept,
@@ -59,7 +75,7 @@ class App extends Component {
       />
     ));
 
-    return <form>{inputs}</form>;
+    return <form className="inputs">{inputs}</form>;
   }
 }
 

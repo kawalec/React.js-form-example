@@ -1,0 +1,25 @@
+.inputs__block {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.inputs__label {
+  width: 80px;
+  & ~ input[type="checkbox"] {
+    margin-right: 165px;
+  }
+}
+
+.inputs__item {
+  max-width: 250px;
+  margin-left: 10px;
+}
+
+.inputs__errors {
+  color: red;
+  margin-left: 20px;
+}
+
+.inputs__errors::before {
+  content: "* ";
+}
