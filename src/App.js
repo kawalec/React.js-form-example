@@ -3,13 +3,15 @@ import "./App.scss";
 import Input from "./components/Input";
 
 class App extends Component {
-  state = { username: "", email: "", password: "" };
+  state = { username: "", email: "", password: "", agree: false };
 
   handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+    const checked = e.target.checked;
+    const type = e.target.type;
     this.setState({
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -35,6 +37,13 @@ class App extends Component {
       name: "password",
       value: this.state.password,
     },
+    {
+      id: "agree",
+      label: "Zgody marketingowe",
+      type: "checkbox",
+      name: "agree",
+      checked: this.state.accept,
+    },
   ];
   render() {
     const inputs = this.data.map((inp) => (
@@ -45,6 +54,7 @@ class App extends Component {
         type={inp.type}
         name={inp.name}
         value={this.state[inp.name]}
+        checked={this.state[inp.name]}
         handleChange={this.handleChange}
       />
     ));

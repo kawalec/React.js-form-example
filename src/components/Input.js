@@ -9,6 +9,7 @@ const Input = (props) => {
         type={props.type}
         name={props.name}
         value={props.value}
+        checked={props.value}
         onChange={props.handleChange}
       ></input>
     </>
