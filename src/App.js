@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.scss";
 import Input from "./components/Input";
+import Button from "./components/Button";
 
 class App extends Component {
   state = {
@@ -22,6 +23,10 @@ class App extends Component {
     email: "Brak znaku @ w adresie email!",
     password: "Hasło musi mieć minimum 8 znaków!",
     agree: "Proszę zaznaczyć zgody!",
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   handleChange = (e) => {
@@ -95,7 +100,12 @@ class App extends Component {
       />
     ));
 
-    return <form className="inputs">{inputs}</form>;
+    return (
+      <form className="inputs">
+        {inputs}
+        <Button click={this.handleSubmit} />
+      </form>
+    );
   }
 }
 

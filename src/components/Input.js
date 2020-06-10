@@ -2,7 +2,6 @@ import React from "react";
 import "./Input.scss";
 
 const Input = (props) => {
-  console.log(props.error.status);
   return (
     <>
       <div className="inputs__block">
