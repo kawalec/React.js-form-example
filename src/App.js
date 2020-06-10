@@ -9,9 +9,10 @@ class App extends Component {
     password: "",
     agree: false,
     errors: {
-      username: false,
+      username: true,
       email: false,
       password: false,
+      agree: false,
     },
   };
 
@@ -20,6 +21,7 @@ class App extends Component {
       "Nazwa powinna mieć więcej niż 4 znaki i nie może zawierać spacji!",
     email: "Brak znaku @ w adresie email!",
     password: "Hasło musi mieć minimum 8 znaków!",
+    agree: "Proszę zaznaczyć zgody!",
   };
 
   handleChange = (e) => {
@@ -38,6 +40,10 @@ class App extends Component {
       type: "text",
       name: "username",
       value: this.state.username,
+      error: {
+        status: this.state.errors.username,
+        message: this.errors_message.username,
+      },
     },
     {
       id: "email",
@@ -45,6 +51,10 @@ class App extends Component {
       type: "email",
       name: "email",
       value: this.state.email,
+      error: {
+        status: this.state.errors.email,
+        message: this.errors_message.email,
+      },
     },
     {
       id: "pass",
@@ -52,6 +62,10 @@ class App extends Component {
       type: "password",
       name: "password",
       value: this.state.password,
+      error: {
+        status: this.state.errors.password,
+        message: this.errors_message.password,
+      },
     },
     {
       id: "agree",
@@ -59,6 +73,10 @@ class App extends Component {
       type: "checkbox",
       name: "agree",
       checked: this.state.accept,
+      error: {
+        status: this.state.errors.agree,
+        message: this.errors_message.agree,
+      },
     },
   ];
   render() {
@@ -72,6 +90,8 @@ class App extends Component {
         value={this.state[inp.name]}
         checked={this.state[inp.name]}
         handleChange={this.handleChange}
+        error_status={inp.error.status}
+        error={inp.error}
       />
     ));
 

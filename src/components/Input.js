@@ -2,6 +2,7 @@ import React from "react";
 import "./Input.scss";
 
 const Input = (props) => {
+  console.log(props.error.status);
   return (
     <>
       <div className="inputs__block">
@@ -16,10 +17,9 @@ const Input = (props) => {
           checked={props.value}
           onChange={props.handleChange}
         ></input>
-
-        <div className="inputs__errors">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </div>
+        {props.error.status && (
+          <div className="inputs__errors">{props.error.message}</div>
+        )}
       </div>
     </>
   );
